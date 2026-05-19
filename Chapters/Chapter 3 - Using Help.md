@@ -5,7 +5,7 @@ A:
 #Updates local powershell help files
 Update-Help
 
-#Saves downloadble help files locally
+#Saves downloadable help files locally
 Save-Help -DestinationPath ".\HelpFiles"
 
 Q2: Can you find any cmdlets capable of converting other cmdlets' output into HTML?
@@ -39,7 +39,7 @@ Help *process*
 
 #Discovered 12 process-related cmdlets
 
-Q5: What cmdlet might you use to set to a powershell breakpoint?
+Q5: What cmdlet might you use to set a powershell breakpoint?
 
 A:
 #Initial wildcard search for breakpoint-related help
