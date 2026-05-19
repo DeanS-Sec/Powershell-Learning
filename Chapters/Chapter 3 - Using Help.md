@@ -115,4 +115,63 @@ Get-Command *invoke*
 
 #Found Invoke-Command cmdlet for running commands on local and remote computers
 
+Q11: Examine the help file for the "Out-File" cmdlet. The files created by this cmdlet default to a width of how many characters? Is there a parameter that would enable you to change the width?
+
+A:
+80 characters. The -Width parameter can change it.
+
+#Review full help for Out-File to find default behavior and parameter details
+Help Out-File -Full
+
+#Found that Out-File defaults to 80 characters wide
+#Found that -Width can be used to change the output width
+
+Q12: By default, Out-File overwrites any existing file that has the same filename as what you specify. Is there a parameter that would prevent the cmdlet from overwriting the existing file?
+
+A:
+-NoClobber prevents Out-File from overwriting an existing file.
+
+#Review full help for Out-File parameter details
+Help Out-File -Full
+
+#Found that -NoClobber prevents overwriting existing files
+#Found that Out-File overwrites files by default unless -NoClobber is specified
+
+Q13: How could you see a list of all aliases defined in powershell
+
+A:
+#Retrieve all currently defined PowerShell aliases
+Get-Alias
+
+Q14: Using both an alias and abbreviated parameter names, what is the shortest command line you could type to retrieve a list of commands with the word process in the name?
+
+A:
+gcm *process
+
+Q15: How many cmdlets are available that can deal with generic objects?
+
+A:
+
+10 cmdlets
+
+#Search for object-related cmdlets and help topics
+Help *object*
+
+#Alternative command discovery method
+Get-Command *object*
+
+#Found 10 object-related cmdlets
+
+Q16: This chapter has briefly mentioned arrays. What help topic could tell you more about them?
+
+A:
+
+about_Arrays
+
+#Search for array-related help topics
+Help *array*
+
+#Open the arrays help topic in full detail
+Help about_Arrays -Full
+
 
