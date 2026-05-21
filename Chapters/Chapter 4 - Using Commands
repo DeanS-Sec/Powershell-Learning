@@ -69,3 +69,32 @@ Get-Process -Name "p*"
 #Retrieves running processes from the local computer
 #Uses the -Name parameter to filter process names
 #Uses the wildcard p* to return processes beginning with the letter P
+
+Q8:7 Make a new folder using the New-Item cmdlet with the name of MyFolder1. Repeat for MyFolder2
+
+A:
+
+New-Item -Path "C:\Users\deanr\OneDrive\Documents\PowerShell\MyFolder1" -ItemType "Directory"
+
+New-Item -Path "C:\Users\deanr\OneDrive\Documents\PowerShell\MyFolder2" -ItemType "Directory"
+
+#Used the New-Item cmdlet to create directories
+#Specified the full directory path using -Path
+#Used -ItemType "Directory" to create folders
+#Created MyFolder1 and MyFolder2 successfully
+
+Q8:Remove the folders from step 7 in a single command. 
+
+A:
+
+Remove-Item -Path "C:\Users\deanr\OneDrive\Documents\PowerShell\MyFolder1", "C:\Users\deanr\OneDrive\Documents\PowerShell\MyFolder2" -Force
+
+#Used Remove-Item to delete both folders in a single command
+#Passed multiple folder paths through the -Path parameter
+#Used -Force after encountering access/read-only related errors
+
+#Alternative wildcard approach explored:
+#Remove-Item -Path "C:\Users\deanr\OneDrive\Documents\PowerShell\MyFolder*" -Force
+
+#Learned that wildcard matching can target multiple folders sharing the same naming pattern
+
