@@ -1,0 +1,106 @@
+Q1: Display a table of processes that includes only the process names, IDs, and whether they are responding to Windows. Have the table take up as little horizontal room as possible, but do not allow any information to be truncated.
+
+A:
+
+Get-Process |
+Select-Object Id, Name, Responding |
+Format-Table -AutoSize
+
+#Used Get-Process to retrieve process objects from the local system
+
+#Initially selected only the Id and Responding properties
+#Reviewed the lab requirements and realized the process Name property was also required
+
+#Used Select-Object to limit the displayed properties to:
+#Id
+#Name
+#Responding
+
+#Used Format-Table to display the selected properties in a tabular format
+
+#Used the -AutoSize parameter to minimize horizontal space usage while keeping the output readable
+
+#Learned that:
+#Get-Process returns Process objects containing many properties
+#Select-Object controls which properties are displayed
+#Format-Table controls how the selected information is presented
+
+#Reinforced the distinction between:
+#Object data
+#Displayed output formatting
+
+Q2: Display a table showing the process name, virtual memory size (VM), and paged memory size (PM) in megabytes rather than bytes.
+
+A:
+
+Get-Process |
+Format-Table Name,
+@{Name='VM(MB)'; Expression={ [int]($*.VM / 1MB) }},
+@{Name='PM(MB)'; Expression={ [int]($*.PM / 1MB) }} -AutoSize
+
+#Used Get-Process to retrieve process objects from the local system
+
+#Learned that the VM and PM properties are stored internally as bytes
+
+#Used calculated properties to convert the values from bytes into megabytes for easier reading
+
+#Created custom columns using PowerShell hash tables
+
+#Used:
+#Name = Column header displayed in the output
+#Expression = Calculation used to generate the displayed value
+
+#Used the current pipeline object ($_ ) to access the VM and PM properties for each process
+
+#Used 1MB as a PowerShell size constant to convert bytes into megabytes
+
+#Used [int] to remove decimal values and simplify the display
+
+#Used Format-Table -AutoSize to improve readability of the formatted output
+
+#Learned that calculated properties allow PowerShell to display custom values without modifying the underlying process objects
+
+#Reinforced the distinction between:
+#Object data
+#Property selection
+#Calculated properties
+#Output formatting
+
+Q3: Use Get-Module to retrieve a list of loaded modules. Format the output as a table that includes, in this order, the module name and version. The column headers must be ModuleName and ModuleVersion.
+
+A:
+
+Get-Module -ListAvailable |
+Select-Object `
+@{Name='ModuleName'; Expression={ $*.Name }},
+@{Name='ModuleVersion'; Expression={ $*.Version }}
+
+#Used Get-Module -ListAvailable to retrieve available PowerShell module objects
+
+#Initially displayed the Name and Version properties directly using:
+#Select-Object Name, Version
+
+#Reviewed the lab requirements and observed that the column headers needed to be:
+#ModuleName
+#ModuleVersion
+
+#Used calculated properties to rename the displayed columns while preserving the underlying data
+
+#Learned that:
+#Name defines the displayed column header
+#Expression defines the value displayed in that column
+
+#Used the current pipeline object ($_ ) to access properties from each module object
+
+#Observed that:
+#$*.Name retrieves the Name property from the current module object
+#$*.Version retrieves the Version property from the current module object
+
+#Learned that calculated properties can be used both to:
+#1. Create new calculated values
+#2. Rename existing properties for display purposes
+
+#Reinforced Chapter 11 concepts:
+#Objects contain properties
+#Select-Object chooses which properties to display
+#Calculated properties control how those properties appear in the final output
