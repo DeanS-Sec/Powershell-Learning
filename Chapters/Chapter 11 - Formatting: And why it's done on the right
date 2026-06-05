@@ -104,3 +104,78 @@ Select-Object `
 #Objects contain properties
 #Select-Object chooses which properties to display
 #Calculated properties control how those properties appear in the final output
+
+Q5: Display a four-column-wide list of all directories in the home directory.
+
+A:
+
+Get-ChildItem -Directory |
+Format-Wide -Column 4
+
+#Initially used:
+#Get-ChildItem | Format-Wide -Column 4
+
+#Observed that the command displayed both directories and files
+
+#Reviewed the lab requirements and determined that only directories should be displayed
+
+#Experimented with Get-ChildItem help documentation and investigated directory-related filtering options
+
+#Learned that the -Directory parameter limits Get-ChildItem output to directory objects only
+
+#Used Format-Wide to display the directory names in a multi-column layout
+
+#Used the -Column parameter to specify a four-column display format
+
+#Observed that Format-Wide changes how objects are displayed without modifying the underlying objects themselves
+
+#Learned that:
+#Get-ChildItem retrieves filesystem objects
+#The -Directory parameter filters those objects
+#Format-Wide controls presentation and layout of the displayed output
+
+#Reinforced Chapter 11 concepts:
+#Object retrieval
+#Object filtering
+#Output formatting
+#Formatting cmdlets modify display, not object data
+
+Q6: Create a formatted list of all DLL files in $PSHOME, displaying the name, version information, and file size. Display the file size under the column name "Size".
+
+A:
+
+Get-ChildItem $PSHOME -Filter *.dll |
+Select-Object Name,
+@{Name="Version"; Expression={ $*.VersionInfo.FileVersion }},
+@{Name="Size"; Expression={ $*.Length }} |
+Format-List
+
+#Used Get-ChildItem with the -Filter parameter to retrieve DLL files from the PowerShell installation directory
+
+#Initially attempted to display Version and FileSize properties directly
+
+#Used Get-Member and experimentation to determine that:
+#VersionInfo contains file version information
+#Length contains the file size in bytes
+
+#Used calculated properties to create custom display columns
+
+#Created a Version column using:
+#$_.VersionInfo.FileVersion
+
+#Created a Size column using:
+#$_.Length
+
+#Used Format-List instead of Format-Table because Version information produced wide output that made table formatting difficult to read
+
+#Learned that:
+#Objects may contain nested properties such as VersionInfo.FileVersion
+#Calculated properties can access both direct and nested object properties
+#Formatting choices should be based on readability of the final output
+
+#Reinforced Chapter 11 concepts:
+#Object properties
+#Calculated properties
+#Property renaming
+#Output formatting
+#Formatting does not modify the underlying object
