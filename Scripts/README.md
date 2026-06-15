@@ -35,7 +35,7 @@ Projects in this folder may include:
 
 | Project            | Description                                                                                                      |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| Endpoint Snapshot  |  |
+| Endpoint Snapshot  | Read-only endpoint assessment tool that gathers system, user, process, service, and storage information to provide a quick security and operational overview of a Windows device. Built as a PowerShell learning project to practice endpoint auditing, object manipulation, filtering, formatting, and reporting concepts. |
 
 ## Notes
 
