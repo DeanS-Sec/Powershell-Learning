@@ -19,17 +19,18 @@ Get-LocalGroupMember -Group Administrators |
     Select-Object Name, ObjectClass, PrincipalSource |
     Format-Table -AutoSize
 
-#Get the top 5 processes currently consuing memory
+#Get the top 5 processes currently consuming memory
 Write-Host "`n=== Top 5 processes by memory ===" -ForegroundColor Cyan
 Get-Process |
     Sort-Object -Property WorkingSet64 -Descending |
     Select-Object -First 5 -Property Name, Id,
         @{Name = 'MemoryMB'; Expression = { [math]::Round($_.WorkingSet64 / 1MB, 2) } } |
-    Format-Table -AutoSize
+    Format-Table |
+    Out-Host
 
 Write-Host "`n=== Service Count ===" -ForegroundColor Cyan
-    (Get-Service | Where-Object { $_.Status -eq "Running" }).Count
-Out-Host
+    (Get-Service | Where-Object { $_.Status -eq "Running" }).Count |
+    Out-Host
 
 #Get the disk space available
 Write-Host "`n=== Available Disk Space ===" -ForegroundColor Cyan
@@ -37,4 +38,5 @@ Get-CimInstance -ClassName Win32_LogicalDisk -Filter "DriveType = 3" |
     Select-Object DeviceID, VolumeName,
         @{Name = 'SizeGB'; Expression = { [math]::Round($_.Size / 1GB, 2) } },
         @{Name = 'FreeGB'; Expression = { [math]::Round($_.FreeSpace / 1GB, 2) } } |
-    Format-Table -AutoSize 
+    Format-Table -AutoSize |
+    Out-Host
